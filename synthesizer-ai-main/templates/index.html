@@ -1,0 +1,153 @@
+<!-- app/templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ratingButtons = document.querySelectorAll('.circle-button');
+
+            ratingButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const rating = this.innerHTML;
+                    setRating(rating);
+                });
+            });
+
+            
+
+        const submitRatingButton = document.getElementById('submit-rating');
+        submitRatingButton.addEventListener('click', function () {
+            const selectedRating = document.getElementById('selected-rating').value;
+            if (selectedRating) {
+                // Play audio and submit rating after playback
+                sendRatingToFlask(selectedRating);
+            } else {
+                console.error('Please select a rating before submitting.');
+                return;
+            }
+        });
+
+
+        function sendRatingToFlask(selectedRating) {
+            $.ajax({
+                type: 'POST',
+                url: '/set_rating',
+                data: { rating: selectedRating },
+                success: function (response) {
+                    console.log('Rating sent to Flask:', selectedRating);
+
+                    // Handle success response if needed
+                },
+                error: function (error) {
+                    console.error('Error sending rating to Flask:', error);
+                    // Handle error if needed
+                }
+            });
+        }
+
+        function setRating(rating) {
+            document.getElementById('selected-rating').value = rating;
+        }
+    });
+
+      </script>
+      
+    
+</head>
+
+<body>
+    <h1>Music Synthesizer A.I</h1>
+    <div class="container">
+      <form action="{{ url_for('generate_music') }}" method="post">
+            <div class="row">
+                <div class="form-group">
+                    <label for="num-bars">Number of Bars</label>
+                    <input type="text" id="num-bars" name="num-bars">
+                </div>
+
+                <div class="form-group">
+                    <label for="num-notes">Notes per Bar</label>
+                    <input type="text" id="num-notes" name="num-notes">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="num-steps">Number of Steps</label>
+                    <input type="text" id="num-steps" name="num-steps">
+                </div>
+
+                <div class="form-group">
+                    <label for="pauses">Pauses</label>
+                    <input type="checkbox" id="pauses" name="pauses">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="key">Key</label>
+                    <select id="key" name="key">
+                      <option value="C">C</option>
+                      <option value="C#">C#</option>
+                      <option value="D">D</option>
+                      <option value="D#">D</option>
+                      <option value="E">E</option>
+                      <option value="F">F</option>
+                      <option value="F#">F#</option>
+                      <option value="G">G</option>
+                      <option value="Gb">Gb</option>
+                      <option value="G#">G#</option>
+                      <option value="Ab">Ab</option>
+                      <option value="A">A</option>
+                      <option value="Bb">Bb</option>
+                      <option value="B">B</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="scale">Scale</label>
+                    <select id="scale" name="scale">
+                      <option value="major">Major</option>
+                      <option value="minor">Minor</option>
+                      <option value="majorBlues">Major Blues</option>
+                      <option value="minorBlues">Minor Blues</option>
+                      <option value="dorian">Dorian</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="root">Scale Root</label>
+                    <input type="text" id="root" name="root">
+                </div>
+            </div>
+            
+            <div class="rating-buttons">
+              <button type="button" class="circle-button" onclick="setRating(1)" >1</button>
+              <button type="button" class="circle-button" onclick="setRating(2)">2</button>
+              <button type="button" class="circle-button" onclick="setRating(3)">3</button>
+              <button type="button" class="circle-button" onclick="setRating(4)">4</button>
+              <button type="button" class="circle-button" onclick="setRating(5)">5</button>
+              
+          </div>          
+
+            <div class="form-group">
+                            <button type="button" id="submit-rating" style="position: absolute; top:120px; right:180px; height: 35px; width: 150px; border-radius: 10px;">Submit Rating</button>
+                            <!-- style="position: absolute; top:120px; right:180px; height: 35px; width: 150px; border-radius: 10px;" -->
+                        </div>
+                        <input type="hidden" id="selected-rating" name="selected-rating" value="">
+          <div class="form-group">
+              <button type="submit" id="generate-music" style="display: absolute;margin-top: -100px; margin-left: 650px;">Generate Music</button>
+          </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

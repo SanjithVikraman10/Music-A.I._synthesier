@@ -1,0 +1,128 @@
+/* app/static/styles.css */
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.73) 0%, rgba(53, 53, 55, 0.53) 300%);
+  overflow: hidden;
+}
+
+h1 {
+  color: #000;
+  text-align: center;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-family: "Fjalla One", sans-serif;
+}
+
+.container {
+  position: relative;
+  margin-left: 190px;
+  width: 1000px;
+  height: 50%;
+  order: 1;
+  border: 1px #000;
+  border-radius: 14px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(180deg, rgba(53, 53, 55, 0.73) 0%, #000 100%);
+  padding: 20px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+label {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: #fff;
+  font-family: "Fjalla One", sans-serif;
+  font-size: 16px;
+}
+
+input,
+select,
+button {
+  padding: 7px;
+  border-radius: 5px;
+  background: #d9d9d9;
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.5) inset;
+  width: 80px;
+  margin-left: 20px;
+}
+
+button {
+  background: #35c034;
+
+  width: 100px;
+  bottom: 50px;
+  right: 50px;
+}
+#generate-music{
+  width: 150px;
+  height: 40px;
+  border-radius: 12px;
+}
+#pauses {
+  width:20%;
+  transform: scale(2.2);
+  background: none;
+  margin-left: 30px;
+}
+
+.rating-buttons {
+  position: absolute;
+  top: 80px; /* Adjust the top distance as needed */
+  right: 150px; /* Adjust the right distance as needed */
+}
+
+.rating-buttons label {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 10%;
+  background: #d9d9d9;
+  margin: 5px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  font-family: "Fjalla One", sans-serif;
+  font-size: 16px;
+  color: #000;
+}
+
+.rating-buttons input {
+  display: none;
+}
+
+.rating-buttons input:checked + label {
+  background: #35c034;
+  color: #fff;
+}
+
+
+.circle-button {
+  width: 30px; /* Adjust the size of the circle */
+  height: 30px; /* Keep width and height the same for a perfect circle */
+  border-radius: 50%; /* Make it a circle */
+  background-color: #35c034; /* Your desired background color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  margin-left: 5px; /* Adjust spacing between circles */
+  cursor: pointer;
+}
